@@ -1,5 +1,7 @@
+noseX=0;
+noseY=0;
 function preload(){
-
+    clown_nose=loadImage("https://i.postimg.cc/JhTfRfS8/Moustache-PNG-Clipart.png")
 }
 function setup(){
     canvas= createCanvas(300,300);
@@ -13,15 +15,18 @@ function setup(){
 function modalLoaded(){
     console.log("PoseNet Is Initialized");
 }
-function gotPoses(result){
-    if(result.length > 0){
+function gotPoses(results){
+    if(results.length > 0){
         console.log(results);
-        console.log("nose x = "+results[0].pose.nose.x)
-        console.log("nose y = "+results[0].pose.nose.y)
+        noseX=results[0].pose.nose.x-15;
+        noseY=results[0].pose.nose.y-10;
+        console.log("nose x = "+results[0].pose.nose.x);
+        console.log("nose y = "+results[0].pose.nose.y);
     }
 }
 function draw(){
     image(video,0,0,300,300);
+    image(clown_nose,noseX,noseY,30,25);
 }
 function take_snapshot(){
     save("myFilterImage.png");
